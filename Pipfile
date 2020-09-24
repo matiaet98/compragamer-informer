@@ -12,3 +12,8 @@ python-dotenv = "*"
 
 [requires]
 python_version = "3.8"
+
+[scripts]
+start = "python ./main.py"
+test = "make test"
+build = "make build"
