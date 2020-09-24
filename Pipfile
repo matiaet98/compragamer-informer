@@ -9,6 +9,7 @@ flake8 = "*"
 [packages]
 pytelegrambotapi = "*"
 python-dotenv = "*"
+beautifulsoup4 = "*"
 
 [requires]
 python_version = "3.8"
