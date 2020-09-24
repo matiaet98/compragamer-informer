@@ -5,4 +5,5 @@ COPY . /compragamer
 WORKDIR /compragamer
 
 RUN pip install pipenv && pipenv install --deploy
-ENTRYPOINT ["pipenv", "run"]
+
+ENTRYPOINT ["pipenv", "run", "start"]
