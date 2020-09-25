@@ -10,7 +10,7 @@ class compragamer:
         }
 
     def search(self, criteria):
-        self.params.criterio = criteria
+        self.params['criterio'] = criteria
         req = requests.get(url=self.url, params=self.params)
         soup = BeautifulSoup(req.text, 'html.parser')
         items = soup.findAll('li', attrs={'class': 'products__item'})
@@ -32,5 +32,5 @@ class compragamer:
                 .findChild('span', attrs={'class': 'products__price-new'}) \
                 .findChild('font') \
                 .contents[0].strip()
-            articulos.append((descripcion, valor))
-            return articulos
+            articulos.append(descripcion + ": " + valor)
+        return articulos

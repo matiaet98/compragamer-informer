@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-
 import settings
 import telebot
 import time
 import threading
 import logging
+from compragamer import compragamer
+
 
 logging.basicConfig(level=logging.INFO)
 bot = telebot.TeleBot(settings.TOKEN)
@@ -20,7 +20,7 @@ def start_help_handler(message):
 @bot.message_handler(commands=['ask'])
 def ask_handler(message):
     logging.debug(msg="ask received from {id}".format(id="message.chat.id"))
-    chatids.append(message.chat.id)
+    chatids.append((message.chat.id, message.text.partition(' ')[2]))
     bot.reply_to(message, "ok")
 
 
@@ -31,6 +31,9 @@ def botpolling():
 
 threading.Thread(target=botpolling).start()
 while True:
-    for id in chatids:
-        bot.send_message(id, "okokokok")
+    for id, criteria in chatids:
+        cg = compragamer()
+        articulos = cg.search(criteria)
+        for articulo in articulos:
+            bot.send_message(id, articulo)
     time.sleep(int(settings.INTERVAL))
